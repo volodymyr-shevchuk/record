@@ -1,11 +1,11 @@
 module LuckyRecord::AllowVirtual
   macro allow_virtual(type_declaration)
-    {% if type_declaration.type.types.size != 2 %}
-      {% raise "Must specify a nilable type. Example: String? "}
+    {% if type_declaration.type.is_a?(Union) %}
+      {% raise "allow_virtual must use just on type" %}
     {% else %}
-      {% type = type_declaration.type.types.first %}
-      {% name = type_declaration.var %}
+      {% type = type_declaration.type %}
     {% end %}
+    {% name = type_declaration.var %}
     @_{{ name }} : LuckyRecord::Field({{ type }}?)?
 
     def {{ name }}

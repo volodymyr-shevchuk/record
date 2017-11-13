@@ -1,8 +1,8 @@
 require "./spec_helper"
 
 private class VirtualForm < User::BaseForm
-  allow_virtual password_confirmation : String?
-  allow_virtual terms_of_service : Bool?
+  allow_virtual password_confirmation : String
+  allow_virtual terms_of_service : Bool
 
   def prepare
     password_confirmation.value = "reset"
